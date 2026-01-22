@@ -1,7 +1,11 @@
 const express = require('express');
 const fs = require('fs');
+const cors = require('cors');
 
 const app = express();
+
+/* 🔥 CORS CORRETO 🔥 */
+app.use(cors());
 app.use(express.json());
 
 const FILE = './produtos.json';
@@ -23,20 +27,6 @@ app.post('/dados', (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log('Rodando na porta', PORT));
-
-const express = require('express');
-const fs = require('fs');
-
-const app = express();
-
-/* 🔽 ADICIONE ESTE BLOCO 🔽 */
-app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  next();
+app.listen(PORT, () => {
+  console.log('Servidor rodando na porta', PORT);
 });
-/* 🔼 ATÉ AQUI 🔼 */
-
-app.use(express.json());
